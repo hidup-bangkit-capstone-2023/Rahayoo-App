@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120996241844",
+    "project_id": "rahayoo-329fa",
+    "storage_bucket": "rahayoo-329fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120996241844:android:1e5a067027cfeba32352e1",
+        "android_client_info": {
+          "package_name": "com.bangkit.rahayoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120996241844-ov66dh6ugob8a3vv2so75p0fgvcphcvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_PyhjhSDc-hffkAQRcL9waoJhtaR2Hcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120996241844-ov66dh6ugob8a3vv2so75p0fgvcphcvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
