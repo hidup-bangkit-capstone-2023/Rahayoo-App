@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Rahayoo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="no_account_label">Didn\'t have an account? <b>Register</b></string>
+    <string name="login">Login</string>
+    <string name="forgot_password_question">Forgot Password?</string>
+    <string name="full_name">Full Name</string>
+    <string name="register">Register</string>
+    <string name="have_account_label">Already have account? <b>Login</b></string>
 </resources>
