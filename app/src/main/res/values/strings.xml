@@ -10,4 +10,18 @@
     <string name="full_name">Full Name</string>
     <string name="register">Register</string>
     <string name="have_account_label">Already have account? <b>Login</b></string>
+    <string name="stress_level_test">Stress Level Test</string>
+    <string name="stress_test_intro_title">Welcome to the Stress Test Room</string>
+    <string name="stress_test_intro_subtitle">you will prompted some easy question in order to measure your stress level. \n<i>Press the button below to start!</i></string>
+    <string name="start">Start</string>
+    <string name="one">1</string>
+    <string name="scale_instruction">Scale 1 - 5</string>
+    <string name="question_header">In the last week,</string>
+    <string name="next_question">Next Question</string>
+    <string name="question_counter_headline">Question %1$d/10</string>
+    <string name="emote_scale_1">😀</string>
+    <string name="emote_scale_2">🙂</string>
+    <string name="emote_scale_3">😔</string>
+    <string name="emote_scale_4">😩</string>
+    <string name="emote_scale_5">😫</string>
 </resources>

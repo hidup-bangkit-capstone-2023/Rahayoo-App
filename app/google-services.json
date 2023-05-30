@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "120996241844",
-    "project_id": "rahayoo-329fa",
-    "storage_bucket": "rahayoo-329fa.appspot.com"
+    "project_number": "518083039344",
+    "firebase_url": "https://rahayoo-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "rahayoo-app",
+    "storage_bucket": "rahayoo-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:120996241844:android:1e5a067027cfeba32352e1",
+        "mobilesdk_app_id": "1:518083039344:android:a9130145022bf3340f64b5",
         "android_client_info": {
           "package_name": "com.bangkit.rahayoo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "120996241844-ov66dh6ugob8a3vv2so75p0fgvcphcvr.apps.googleusercontent.com",
+          "client_id": "518083039344-nni5g3nd57c3n7i5pfhp80qd363glhqg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_PyhjhSDc-hffkAQRcL9waoJhtaR2Hcs"
+          "current_key": "AIzaSyDuyhOHpfM-pp8HU_6-1IczSxWIrYFd3JU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "120996241844-ov66dh6ugob8a3vv2so75p0fgvcphcvr.apps.googleusercontent.com",
+              "client_id": "518083039344-2un4bvbvr2a6oq3nreleli6v4ieno2fi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
