@@ -1,7 +1,6 @@
 package com.bangkit.rahayoo.ui.register
 
 import android.os.Bundle
-import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
 import com.bangkit.rahayoo.data.model.AuthResult
-import com.bangkit.rahayoo.data.model.User
+import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.databinding.FragmentRegisterBinding
+import com.bangkit.rahayoo.di.Injection
+import com.bangkit.rahayoo.ui.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 
 class RegisterFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<RegisterViewModel>()
+    private val viewModel by viewModels<RegisterViewModel> {
+        ViewModelFactory(Injection.provideRepository())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,15 +49,20 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                     binding.progressIndicator.visibility = View.VISIBLE
                 }
                 is AuthResult.Success -> {
-                    binding.progressIndicator.visibility = View.GONE
-                    if (it.data != null) {
-                        // TODO: Navigate to Insert Organization Fragment
-                        val user = it.data as FirebaseUser
-                        Snackbar.make(
-                            binding.root,
-                            "Register Success ${user.displayName}",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+                    when (it.data) {
+                        is com.google.firebase.auth.AuthResult -> {
+                            viewModel.registerServer(binding.etName.text.toString(), binding.etEmail.text.toString())
+                        }
+                        is MessageResponse -> {
+                            binding.progressIndicator.visibility = View.GONE
+
+                            // TODO: Navigate to Insert Organization Fragment
+                            Snackbar.make(
+                                binding.root,
+                                it.data.message,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
                 is AuthResult.Error -> {
@@ -74,7 +81,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v!!.id) {
             R.id.btn_register -> {
-                viewModel.register(binding.etName.text.toString(), binding.etEmail.text.toString(), binding.etPassword.text.toString())
+                viewModel.registerFirebase(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             }
             R.id.tv_have_account -> {
                 findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
