@@ -1,6 +1,7 @@
 package com.bangkit.rahayoo.data
 
 import com.bangkit.rahayoo.data.firebase.FirebaseDataSource
+import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.body.RegisterBody
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.remote.ApiService
@@ -33,12 +34,25 @@ class Repository(
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
             val registerBody = RegisterBody(name, email)
-            val bearerToken = getTokenTask.token.toString()
-            val response = apiService.register(bearerToken, registerBody)
+            val response = apiService.register(getTokenTask.token!!, registerBody)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {
-                onSuccess(MessageResponse(response.message()))
+                onFailure(Exception(response.message()))
+            }
+        } else {
+            onFailure(Exception("Failed to retrieve firebase id token"))
+        }
+    }
+
+    suspend fun submitStressTestAnswer(answers: List<StressTestQuestion>, onSuccess: (message: MessageResponse) -> Unit, onFailure: (Exception) -> Unit) {
+        val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
+        return if (getTokenTask?.token != null) {
+            val response = apiService.submitStressTestAnswer(getTokenTask.token!!, answers)
+            if (response.isSuccessful) {
+                onSuccess(response.body()!!)
+            } else {
+                onFailure(Exception(response.message()))
             }
         } else {
             onFailure(Exception("Failed to retrieve firebase id token"))

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
-import com.bangkit.rahayoo.data.model.AuthResult
+import com.bangkit.rahayoo.data.model.UiState
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.databinding.FragmentRegisterBinding
 import com.bangkit.rahayoo.di.Injection
@@ -45,10 +45,10 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
         viewModel.authResult.observe(viewLifecycleOwner) {
             when (it) {
-                is AuthResult.Loading -> {
+                is UiState.Loading -> {
                     binding.progressIndicator.visibility = View.VISIBLE
                 }
-                is AuthResult.Success -> {
+                is UiState.Success -> {
                     when (it.data) {
                         is com.google.firebase.auth.AuthResult -> {
                             viewModel.registerServer(binding.etName.text.toString(), binding.etEmail.text.toString())
@@ -56,16 +56,17 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         is MessageResponse -> {
                             binding.progressIndicator.visibility = View.GONE
 
-                            // TODO: Navigate to Insert Organization Fragment
                             Snackbar.make(
                                 binding.root,
                                 it.data.message,
                                 Snackbar.LENGTH_SHORT
                             ).show()
+
+                            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
                         }
                     }
                 }
-                is AuthResult.Error -> {
+                is UiState.Error -> {
                     binding.progressIndicator.visibility = View.GONE
                     // Show error snackbar
                     Snackbar.make(

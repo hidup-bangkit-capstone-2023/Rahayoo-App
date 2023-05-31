@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.StressTestQuestions
 import com.bangkit.rahayoo.databinding.FragmentStressTestBinding
+import com.bangkit.rahayoo.di.Injection
+import com.bangkit.rahayoo.ui.ViewModelFactory
 import com.bangkit.rahayoo.util.toEmoteValue
 import com.bangkit.rahayoo.util.toProgressValue
 import com.bangkit.rahayoo.util.toScaleValue
@@ -26,7 +29,9 @@ class StressTestFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentStressTestBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: StressTestViewModel by viewModels()
+    private val viewModel: StressTestViewModel by viewModels {
+        ViewModelFactory(Injection.provideRepository())
+    }
 
     private var questionCounter = 0
 
@@ -54,6 +59,7 @@ class StressTestFragment : Fragment(), View.OnClickListener {
 
         binding.btnStressTest.setOnClickListener(this)
         binding.btnQuestionNavigate.setOnClickListener(this)
+        binding.btnClose.setOnClickListener(this)
 
         binding.tvLabelAnswer.setCharacterLists(TickerUtils.provideNumberList())
         binding.tvStressLevelHeadline.setCharacterLists(TickerUtils.provideAlphabeticalList())
@@ -107,6 +113,9 @@ class StressTestFragment : Fragment(), View.OnClickListener {
             }
             R.id.btn_question_navigate -> {
                 nextQuestion()
+            }
+            R.id.btn_close -> {
+                findNavController().navigateUp()
             }
         }
     }
