@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.rahayoo.data.Repository
 import com.bangkit.rahayoo.ui.login.LoginViewModel
 import com.bangkit.rahayoo.ui.register.RegisterViewModel
+import com.bangkit.rahayoo.ui.test.StressTestViewModel
 
 class ViewModelFactory(private val repository: Repository): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -14,6 +15,9 @@ class ViewModelFactory(private val repository: Repository): ViewModelProvider.Ne
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(StressTestViewModel::class.java) -> {
+                StressTestViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown view model class: ${modelClass.name}")
         }

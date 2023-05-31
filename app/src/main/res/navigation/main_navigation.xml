@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_stressTestFragment"
             app:destination="@id/stressTestFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -25,10 +28,22 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/stressTestFragment"
         android:name="com.bangkit.rahayoo.ui.test.StressTestFragment"
         android:label="fragment_stress_test"
         tools:layout="@layout/fragment_stress_test" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bangkit.rahayoo.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_stressTestFragment"
+            app:destination="@id/stressTestFragment" />
+    </fragment>
 </navigation>

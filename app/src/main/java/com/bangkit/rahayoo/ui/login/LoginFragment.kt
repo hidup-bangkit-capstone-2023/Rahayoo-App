@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bangkit.rahayoo.data.model.AuthResult
+import com.bangkit.rahayoo.data.model.UiState
 import com.bangkit.rahayoo.databinding.FragmentLoginBinding
 import com.bangkit.rahayoo.di.Injection
 import com.bangkit.rahayoo.ui.ViewModelFactory
@@ -44,23 +44,22 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         viewModel.authResult.observe(viewLifecycleOwner) {
             when (it) {
-                is AuthResult.Loading -> {
+                is UiState.Loading -> {
                     binding.progressIndicator.visibility = View.VISIBLE
                 }
 
-                is AuthResult.Success -> {
+                is UiState.Success -> {
                     binding.progressIndicator.visibility = View.GONE
-                    if (it.data != null) {
-                        // TODO: Navigate to Home
-                        Snackbar.make(
-                            binding.root,
-                            "Login Success",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
+                    Snackbar.make(
+                        binding.root,
+                        "Login Success",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                 }
 
-                is AuthResult.Error -> {
+                is UiState.Error -> {
                     binding.progressIndicator.visibility = View.GONE
                     // Show error snackbar
                     Snackbar.make(
