@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Rahayoo</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -24,4 +23,5 @@
     <string name="emote_scale_3">😔</string>
     <string name="emote_scale_4">😩</string>
     <string name="emote_scale_5">😫</string>
+    <string name="submit">Submit</string>
 </resources>
