@@ -1,11 +1,15 @@
 package com.bangkit.rahayoo.ui.test
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bangkit.rahayoo.R
+import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.StressTestQuestions
 import com.bangkit.rahayoo.databinding.FragmentStressTestBinding
 import com.bangkit.rahayoo.util.toEmoteValue
@@ -22,10 +26,13 @@ class StressTestFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentStressTestBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: StressTestViewModel by viewModels()
+
     private var questionCounter = 0
 
     private val questions = StressTestQuestions.getAllQuestion()
     private var currentQuestion = questions[questionCounter]
+    private val answeredQuestion = mutableListOf<StressTestQuestion>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +73,14 @@ class StressTestFragment : Fragment(), View.OnClickListener {
     }
 
     private fun nextQuestion() {
+        if (questionCounter == questions.size - 1) {
+            viewModel.submitAnswer(answeredQuestion)
+            return
+        }
+
+        answeredQuestion.add(currentQuestion.copy(
+            answerScale = binding.slider.value.toScaleValue()
+        ))
         currentQuestion = questions[++questionCounter]
 
         resetSlider()
@@ -73,6 +88,10 @@ class StressTestFragment : Fragment(), View.OnClickListener {
         binding.lpiQuestion.incrementProgressBy(10)
         binding.tvStressLevelHeadline.text = getString(R.string.question_counter_headline, questionCounter + 1)
         binding.tvQuestion.text = currentQuestion.question
+
+        if (questionCounter == questions.size - 1) {
+            binding.btnQuestionNavigate.text = getString(R.string.submit)
+        }
     }
 
     private fun resetSlider() {

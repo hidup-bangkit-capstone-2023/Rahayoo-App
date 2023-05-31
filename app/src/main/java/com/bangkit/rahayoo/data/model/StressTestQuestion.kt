@@ -4,6 +4,7 @@ data class StressTestQuestion(
     val id: Int,
     val question: String,
     val questionType: StressTestQuestionType = StressTestQuestionType.POSITIVE,
+    val answerScale: Int = 1,
 )
 
 enum class StressTestQuestionType {

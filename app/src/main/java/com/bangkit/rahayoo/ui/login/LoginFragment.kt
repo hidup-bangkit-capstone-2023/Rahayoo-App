@@ -36,6 +36,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         binding.btnLogin.setOnClickListener(this)
         binding.tvNoAccount.setOnClickListener(this)
+        binding.tvForgotPassword.setOnClickListener(this)
 
         viewModel.authResult.observe(viewLifecycleOwner) {
             when (it) {
@@ -77,6 +78,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
             binding.tvNoAccount.id -> {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            }
+            binding.tvForgotPassword.id -> {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStressTestFragment())
             }
         }
     }

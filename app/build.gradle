@@ -59,6 +59,12 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 
     // ViewModel & LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+
+    // Logging Interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    // TickerView
+    implementation 'com.robinhood.ticker:ticker:2.0.4'
 }
