@@ -27,13 +27,13 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="20dp"/>
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/auth_blob"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"
+        android:layout_marginTop="-12dp"
         android:importantForAccessibility="no"/>
 
     <TextView

@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.data.model.AuthResult
 import com.bangkit.rahayoo.databinding.FragmentLoginBinding
+import com.bangkit.rahayoo.di.Injection
+import com.bangkit.rahayoo.ui.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -16,7 +18,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory(Injection.provideRepository())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
