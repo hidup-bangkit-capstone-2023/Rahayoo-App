@@ -80,6 +80,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 viewModel.login(email, password)
             }
             binding.tvNoAccount.id -> {
+                findNavController().popBackStack()
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
             binding.tvForgotPassword.id -> {
