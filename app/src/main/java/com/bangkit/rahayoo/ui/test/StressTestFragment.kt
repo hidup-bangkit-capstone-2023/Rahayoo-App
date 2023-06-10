@@ -30,7 +30,7 @@ class StressTestFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val viewModel: StressTestViewModel by viewModels {
-        ViewModelFactory(Injection.provideRepository())
+        ViewModelFactory(Injection.provideRepository(requireContext()))
     }
 
     private var questionCounter = 0

@@ -1,5 +1,6 @@
 package com.bangkit.rahayoo.data.model
 
+import com.squareup.moshi.Json
 import java.time.LocalDate
 
 data class User(
@@ -7,8 +8,11 @@ data class User(
     val name: String,
     val email: String,
     val address: String,
-    val dateOfBirth: LocalDate,
+    @Json(name = "date_of_birth")
+    val dateOfBirth: String,
     val age: Int,
+    @Json(name = "department_id")
     val departmentId: Int,
+    @Json(name = "avatar_url")
     val avatarUrl: String? = null,
 )

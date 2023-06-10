@@ -4,6 +4,7 @@ import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
 import com.bangkit.rahayoo.data.model.body.UserBody
+import com.bangkit.rahayoo.data.model.body.UserIdBody
 import com.bangkit.rahayoo.data.model.response.CompanyResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
@@ -35,15 +36,15 @@ interface ApiService {
         companyCode: String
     ): Response<CompanyResponse>
 
-    @POST("api/stress-level/")
+    @POST("api/stress-level")
     suspend fun submitStressTestAnswer(
         @Header("Authorization") authorization: String,
         @Body body: List<StressTestQuestion>
     ): Response<MessageResponse>
 
-    @GET("api/user")
+    @GET("api/auth/employee/data")
     suspend fun getUserData(
-        @Header("Authorization") authorization: String
+        @Header("Authorization") authorization: String, @Body userIdBody: UserIdBody
     ): Response<User>
 
     @GET("api/stress-level")

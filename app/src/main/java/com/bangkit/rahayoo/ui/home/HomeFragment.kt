@@ -20,7 +20,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels {
-        ViewModelFactory(Injection.provideRepository())
+        ViewModelFactory(Injection.provideRepository(requireContext()))
     }
 
     override fun onCreateView(
@@ -36,6 +36,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnTakeStressTest.setOnClickListener(this)
+        binding.btnNotification.setOnClickListener(this)
 
         viewModel.user.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -104,6 +105,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.btn_take_stress_test -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStressTestFragment())
+            }
+            R.id.btn_notification -> {
+                viewModel.signOut()
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
             }
         }
     }

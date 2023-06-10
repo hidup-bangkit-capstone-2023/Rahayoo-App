@@ -43,6 +43,7 @@
                 android:textColor="?attr/colorOnPrimary"/>
 
             <ImageView
+                android:id="@+id/btn_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_notification"

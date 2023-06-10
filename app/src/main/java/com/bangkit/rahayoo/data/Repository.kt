@@ -1,9 +1,11 @@
 package com.bangkit.rahayoo.data
 
 import com.bangkit.rahayoo.data.firebase.FirebaseDataSource
+import com.bangkit.rahayoo.data.local.Preferences
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
+import com.bangkit.rahayoo.data.model.body.UserIdBody
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
 import com.bangkit.rahayoo.data.remote.ApiService
@@ -12,7 +14,8 @@ import kotlinx.coroutines.tasks.await
 
 class Repository(
     private val apiService: ApiService,
-    private val firebaseDataSource: FirebaseDataSource
+    private val firebaseDataSource: FirebaseDataSource,
+    private val preferences: Preferences
 ) {
     fun signInWithEmailAndPassword(
         email: String,
@@ -42,6 +45,7 @@ class Repository(
             val registerBody = RegisterBody(name, email)
             val response = apiService.register(getTokenTask.token!!, registerBody)
             if (response.isSuccessful) {
+                preferences.saveUserId(response.body()!!.userId)
                 onSuccess(response.body()!!)
             } else {
                 onFailure(Exception(response.message()))
@@ -68,7 +72,9 @@ class Repository(
     suspend fun getUserData(onSuccess: (User) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
-            val response = apiService.getUserData(getTokenTask.token!!)
+            val userId = preferences.getUserId()
+            val body = UserIdBody(userId!!)
+            val response = apiService.getUserData(getTokenTask.token!!, body)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {
@@ -93,13 +99,18 @@ class Repository(
         }
     }
 
+    fun signOutUser() {
+        preferences.clearUserData()
+        firebaseDataSource.signOutUser()
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null
 
-        fun getInstance(apiService: ApiService, firebaseDataSource: FirebaseDataSource): Repository =
+        fun getInstance(apiService: ApiService, firebaseDataSource: FirebaseDataSource, preferences: Preferences): Repository =
             INSTANCE ?: synchronized(this) {
-                Repository(apiService, firebaseDataSource).apply {
+                Repository(apiService, firebaseDataSource, preferences).apply {
                     INSTANCE = this
                 }
             }

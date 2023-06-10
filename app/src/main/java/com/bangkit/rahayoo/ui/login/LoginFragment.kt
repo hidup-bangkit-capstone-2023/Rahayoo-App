@@ -19,7 +19,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory(Injection.provideRepository())
+        ViewModelFactory(Injection.provideRepository(requireContext()))
     }
 
     override fun onCreateView(
@@ -27,6 +27,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+
+        if (viewModel.isUserLoggedIn) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+        }
+
         return binding.root
     }
 
@@ -80,11 +85,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 viewModel.login(email, password)
             }
             binding.tvNoAccount.id -> {
-                findNavController().popBackStack()
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
-            }
-            binding.tvForgotPassword.id -> {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStressTestFragment())
             }
         }
     }

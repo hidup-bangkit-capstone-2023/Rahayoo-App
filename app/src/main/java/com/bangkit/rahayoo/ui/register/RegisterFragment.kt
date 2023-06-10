@@ -21,7 +21,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<RegisterViewModel> {
-        ViewModelFactory(Injection.provideRepository())
+        ViewModelFactory(Injection.provideRepository(requireContext()))
     }
 
     override fun onCreateView(

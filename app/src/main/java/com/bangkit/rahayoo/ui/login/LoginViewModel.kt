@@ -15,6 +15,8 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     val authResult: MutableLiveData<UiState<AuthResult>>
         get() = _authResult
 
+    val isUserLoggedIn = repository.isUserLoggedIn()
+
     fun login(email: String, password: String) {
         _authResult.value = UiState.Loading
         viewModelScope.launch {

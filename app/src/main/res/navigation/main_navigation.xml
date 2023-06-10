@@ -9,18 +9,15 @@
         android:id="@+id/loginFragment"
         android:name="com.bangkit.rahayoo.ui.login.LoginFragment"
         android:label="fragment_login"
-        app:route="@string/fragment_login_route"
         tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_stressTestFragment"
-            app:destination="@id/stressTestFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/main_navigation" />
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -44,10 +41,14 @@
         android:id="@+id/homeFragment"
         android:name="com.bangkit.rahayoo.ui.home.HomeFragment"
         android:label="fragment_home"
-        app:route="@string/fragment_home_route"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_stressTestFragment"
             app:destination="@id/stressTestFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
