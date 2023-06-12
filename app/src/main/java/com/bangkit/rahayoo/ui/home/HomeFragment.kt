@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         Glide.with(requireContext())
                             .load(userData.avatarUrl)
                             .circleCrop()
-                            .placeholder(R.drawable.ic_app_logo)
+                            .placeholder(R.drawable.ic_logo_non_transparent)
                             .into(ivProfile)
 
                         tvProfileName.text = userData.name

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.rahayoo.data.Repository
 import com.bangkit.rahayoo.ui.home.HomeViewModel
 import com.bangkit.rahayoo.ui.login.LoginViewModel
+import com.bangkit.rahayoo.ui.profile.ProfileViewModel
+import com.bangkit.rahayoo.ui.profile.edit.EditProfileViewModel
 import com.bangkit.rahayoo.ui.register.RegisterViewModel
 import com.bangkit.rahayoo.ui.test.StressTestViewModel
 
@@ -22,6 +24,12 @@ class ViewModelFactory(private val repository: Repository): ViewModelProvider.Ne
             }
             modelClass.isAssignableFrom(StressTestViewModel::class.java) -> {
                 StressTestViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
+                EditProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown view model class: ${modelClass.name}")
         }

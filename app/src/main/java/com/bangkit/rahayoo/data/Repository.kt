@@ -5,8 +5,9 @@ import com.bangkit.rahayoo.data.local.Preferences
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
-import com.bangkit.rahayoo.data.model.body.UserIdBody
+import com.bangkit.rahayoo.data.model.body.UserBody
 import com.bangkit.rahayoo.data.model.response.MessageResponse
+import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
 import com.bangkit.rahayoo.data.remote.ApiService
 import com.google.firebase.auth.AuthResult
@@ -39,7 +40,7 @@ class Repository(
         return firebaseDataSource.getCurrentUser() != null
     }
 
-    suspend fun registerUserOnServer(name: String, email: String, onSuccess: (message: MessageResponse) -> Unit, onFailure: (Exception) -> Unit) {
+    suspend fun registerUserOnServer(name: String, email: String, onSuccess: (message: MessageResponseWithUserId) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
             val registerBody = RegisterBody(name, email)
@@ -55,7 +56,7 @@ class Repository(
         }
     }
 
-    suspend fun submitStressTestAnswer(answers: List<StressTestQuestion>, onSuccess: (message: MessageResponse) -> Unit, onFailure: (Exception) -> Unit) {
+    suspend fun submitStressTestAnswer(answers: List<StressTestQuestion>, onSuccess: (message: MessageResponseWithUserId) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
             val response = apiService.submitStressTestAnswer(getTokenTask.token!!, answers)
@@ -74,6 +75,21 @@ class Repository(
         return if (getTokenTask?.token != null) {
             val userId = preferences.getUserId()
             val response = apiService.getUserData(getTokenTask.token!!, userId!!)
+            if (response.isSuccessful) {
+                onSuccess(response.body()!!)
+            } else {
+                onFailure(Exception(response.message()))
+            }
+        } else {
+            onFailure(Exception("Failed to retrieve firebase id token"))
+        }
+    }
+
+    suspend fun updateUserData(userBody: UserBody, onSuccess: (message: MessageResponse) -> Unit, onFailure: (Exception) -> Unit) {
+        val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
+        return if (getTokenTask?.token != null) {
+            val userId = preferences.getUserId()
+            val response = apiService.updateUserData(getTokenTask.token!!, userBody, userId!!)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {

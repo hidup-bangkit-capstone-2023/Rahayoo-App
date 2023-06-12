@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
 import com.bangkit.rahayoo.data.model.UiState
-import com.bangkit.rahayoo.data.model.response.MessageResponse
+import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.databinding.FragmentRegisterBinding
 import com.bangkit.rahayoo.di.Injection
 import com.bangkit.rahayoo.ui.ViewModelFactory
@@ -53,7 +53,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         is com.google.firebase.auth.AuthResult -> {
                             viewModel.registerServer(binding.etName.text.toString(), binding.etEmail.text.toString())
                         }
-                        is MessageResponse -> {
+                        is MessageResponseWithUserId -> {
                             binding.progressIndicator.visibility = View.GONE
 
                             Snackbar.make(

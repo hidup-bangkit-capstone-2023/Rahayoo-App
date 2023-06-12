@@ -4,9 +4,9 @@ import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
 import com.bangkit.rahayoo.data.model.body.UserBody
-import com.bangkit.rahayoo.data.model.body.UserIdBody
 import com.bangkit.rahayoo.data.model.response.CompanyResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponse
+import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
 import com.squareup.moshi.Json
 import retrofit2.Response
@@ -21,12 +21,13 @@ interface ApiService {
     suspend fun register(
         @Header("Authorization") authorization: String,
         @Body body: RegisterBody
-    ): Response<MessageResponse>
+    ): Response<MessageResponseWithUserId>
 
-    @POST("api/auth/user-update")
-    suspend fun updateUser(
+    @POST("api/auth/user-update/{id}")
+    suspend fun updateUserData(
         @Header("Authorization") authorization: String,
-        @Body body: UserBody
+        @Body userBody: UserBody,
+        @Path("id") userId: String
     ): Response<MessageResponse>
 
     @POST("api/auth/company")
@@ -41,7 +42,7 @@ interface ApiService {
     suspend fun submitStressTestAnswer(
         @Header("Authorization") authorization: String,
         @Body body: List<StressTestQuestion>
-    ): Response<MessageResponse>
+    ): Response<MessageResponseWithUserId>
 
     @GET("api/auth/employee/data/{id}")
     suspend fun getUserData(

@@ -7,9 +7,9 @@ data class StressLevelResponse(
     @Json(name = "weekly_stress_avg")
     val weeklyStressAvg: Int,
     @Json(name = "weekly_mood_avg")
-    val weeklyMoodAvg: Int,
+    val weeklyMoodAvg: Int?,
     @Json(name = "weekly_mood_per_day")
-    val weeklyMoodPerDay: List<MoodPerDay>
+    val weeklyMoodPerDay: List<MoodPerDay>?
 )
 
 data class MoodPerDay(
