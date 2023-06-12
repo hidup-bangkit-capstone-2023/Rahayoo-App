@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/stressTestFragment"
+        android:id="@+id/chatFragment"
         android:icon="@drawable/ic_chat"
         android:title="@string/chat"
         app:showAsAction="ifRoom"/>

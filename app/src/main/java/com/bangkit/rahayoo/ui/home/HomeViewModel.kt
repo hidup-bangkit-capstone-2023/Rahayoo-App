@@ -27,13 +27,13 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     private fun getUserData() {
         _user.value = UiState.Loading
-//        viewModelScope.launch {
-//            repository.getUserData({
-//                _user.value = UiState.Success(it)
-//            }, {
-//                _user.value = UiState.Error(it.message.toString())
-//            })
-//        }
+        viewModelScope.launch {
+            repository.getUserData({
+                _user.value = UiState.Success(it)
+            }, {
+                _user.value = UiState.Error(it.message.toString())
+            })
+        }
     }
 
     private fun getUserStressLevelData() {

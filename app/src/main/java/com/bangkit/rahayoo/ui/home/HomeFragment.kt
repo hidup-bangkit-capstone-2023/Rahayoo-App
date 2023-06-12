@@ -37,6 +37,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         binding.btnTakeStressTest.setOnClickListener(this)
         binding.btnNotification.setOnClickListener(this)
+        binding.cvUpdateDataNow.setOnClickListener(this)
 
         viewModel.user.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -45,7 +46,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 }
 
                 is UiState.Success -> {
+
                     val userData = uiState.data
+
+                    if (userData.age != null) {
+                        binding.cvUpdateDataNow.visibility = View.GONE
+                    }
 
                     binding.apply {
                         Glide.with(requireContext())
@@ -74,8 +80,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 is UiState.Success -> {
                     changeWeeklyCalendarLoadingVisibility(false)
                     val userStressLevelData = uiState.data
+
+
                     binding.apply {
-                        tvPercentageStressWeek.text = getString(R.string.stress_level_weekly_percentage, userStressLevelData.stressValue)
+//                        tvPercentageStressWeek.text = getString(R.string.stress_level_weekly_percentage, userStressLevelData.stressValue)
                     }
                 }
 
@@ -110,6 +118,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 viewModel.signOut()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
             }
+            R.id.cv_update_data_now -> {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToEditProfileFragment())
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

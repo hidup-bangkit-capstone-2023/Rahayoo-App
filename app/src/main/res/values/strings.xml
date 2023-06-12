@@ -41,4 +41,6 @@
     <string name="chat_button">Chat Button</string>
     <string name="fragment_profile_route">FragmentProfileRoute</string>
     <string name="chat">Chat</string>
+    <string name="chat_field_label">Type here...</string>
+    <string name="update_your_date_text">Update your data to experience more features</string>
 </resources>

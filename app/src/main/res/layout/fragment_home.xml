@@ -83,13 +83,54 @@
                 app:layout_constraintGuide_end="20dp"/>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_weekly_calendar_container"
+                android:id="@+id/cv_update_data_now"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/guideline_start"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="12dp"
+                app:strokeColor="?attr/colorPrimaryInverse"
+                app:strokeWidth="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:background="?attr/colorPrimary">
+
+                    <ImageView
+                        android:id="@+id/iv_info_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:src="@drawable/ic_info"
+                        android:importantForAccessibility="no"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/update_your_date_text"
+                        app:layout_constraintTop_toTopOf="@id/iv_info_update"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_info_update"
+                        app:layout_constraintStart_toEndOf="@id/iv_info_update"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:layout_marginStart="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_weekly_calendar_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/cv_update_data_now"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:strokeColor="?attr/colorPrimaryInverse"
                 app:strokeWidth="2dp">
 

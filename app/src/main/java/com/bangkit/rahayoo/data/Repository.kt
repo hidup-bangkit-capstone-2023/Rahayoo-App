@@ -73,8 +73,7 @@ class Repository(
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
             val userId = preferences.getUserId()
-            val body = UserIdBody(userId!!)
-            val response = apiService.getUserData(getTokenTask.token!!, body)
+            val response = apiService.getUserData(getTokenTask.token!!, userId!!)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {

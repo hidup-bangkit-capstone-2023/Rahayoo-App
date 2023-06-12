@@ -14,6 +14,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
     @POST("api/auth/register")
@@ -42,9 +43,9 @@ interface ApiService {
         @Body body: List<StressTestQuestion>
     ): Response<MessageResponse>
 
-    @GET("api/auth/employee/data")
+    @GET("api/auth/employee/data/{id}")
     suspend fun getUserData(
-        @Header("Authorization") authorization: String, @Body userIdBody: UserIdBody
+        @Header("Authorization") authorization: String, @Path("id") userId: String
     ): Response<User>
 
     @GET("api/stress-level")
