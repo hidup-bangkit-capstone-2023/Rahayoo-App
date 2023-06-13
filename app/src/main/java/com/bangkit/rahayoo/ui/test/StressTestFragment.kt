@@ -1,24 +1,23 @@
 package com.bangkit.rahayoo.ui.test
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
 import com.bangkit.rahayoo.data.model.StressTestAnswer
-import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.StressTestQuestions
+import com.bangkit.rahayoo.data.model.UiState
 import com.bangkit.rahayoo.databinding.FragmentStressTestBinding
 import com.bangkit.rahayoo.di.Injection
 import com.bangkit.rahayoo.ui.ViewModelFactory
 import com.bangkit.rahayoo.util.toEmoteValue
 import com.bangkit.rahayoo.util.toProgressValue
 import com.bangkit.rahayoo.util.toScaleValue
+import com.google.android.material.snackbar.Snackbar
 import com.robinhood.ticker.TickerUtils
 
 class StressTestFragment : Fragment(), View.OnClickListener {
@@ -38,7 +37,7 @@ class StressTestFragment : Fragment(), View.OnClickListener {
 
     private val questions = StressTestQuestions.getAllQuestion()
     private var currentQuestion = questions[questionCounter]
-    private val answeredQuestion = mutableListOf<StressTestAnswer>()
+    private val answeredQuestion = StressTestAnswer(mutableListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +63,36 @@ class StressTestFragment : Fragment(), View.OnClickListener {
 
         binding.tvLabelAnswer.setCharacterLists(TickerUtils.provideNumberList())
         binding.tvStressLevelHeadline.setCharacterLists(TickerUtils.provideAlphabeticalList())
+
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UiState.Loading -> {
+                    Snackbar.make(
+                        binding.root,
+                        "Submitting Answer",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+
+                is UiState.Success -> {
+                    Snackbar.make(
+                        binding.root,
+                        "Answer Submitted",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    findNavController().navigateUp()
+                }
+
+                is UiState.Error -> {
+                    // Show Error
+                    Snackbar.make(
+                        binding.root,
+                        "Error submitting answer: ${uiState.error}",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun setupQuestion() {
@@ -86,11 +115,7 @@ class StressTestFragment : Fragment(), View.OnClickListener {
             return
         }
 
-        answeredQuestion.add(
-            StressTestAnswer(
-                answerScale = binding.slider.value.toScaleValue()
-            )
-        )
+        answeredQuestion.stressLevel.add(binding.slider.value.toScaleValue())
         currentQuestion = questions[++questionCounter]
 
         resetSlider()

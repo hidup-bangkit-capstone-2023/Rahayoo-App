@@ -58,7 +58,7 @@ class Repository(
         }
     }
 
-    suspend fun submitStressTestAnswer(answers: List<StressTestAnswer>, onSuccess: (message: MessageResponseWithUserId) -> Unit, onFailure: (Exception) -> Unit) {
+    suspend fun submitStressTestAnswer(answers: StressTestAnswer, onSuccess: (message: MessageResponse) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
             val userId = preferences.getUserId()

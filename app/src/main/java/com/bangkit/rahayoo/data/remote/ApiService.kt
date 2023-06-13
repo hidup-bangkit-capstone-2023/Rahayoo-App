@@ -1,7 +1,6 @@
 package com.bangkit.rahayoo.data.remote
 
 import com.bangkit.rahayoo.data.model.StressTestAnswer
-import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
 import com.bangkit.rahayoo.data.model.body.UserBody
@@ -55,9 +54,9 @@ interface ApiService {
     @POST("api/stress-level/add/{id}")
     suspend fun submitStressTestAnswer(
         @Header("Authorization") authorization: String,
-        @Body body: List<StressTestAnswer>,
+        @Body body: StressTestAnswer,
         @Path("id") userId: String
-    ): Response<MessageResponseWithUserId>
+    ): Response<MessageResponse>
 
     @GET("api/auth/employee/data/{id}")
     suspend fun getUserData(

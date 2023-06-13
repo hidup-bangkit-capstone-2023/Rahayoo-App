@@ -8,7 +8,7 @@ data class StressTestQuestion(
 )
 
 data class StressTestAnswer(
-    val answerScale: Int = 1
+    val stressLevel: MutableList<Int>
 )
 
 enum class StressTestQuestionType {

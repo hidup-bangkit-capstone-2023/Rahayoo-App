@@ -8,17 +8,18 @@ import com.bangkit.rahayoo.data.Repository
 import com.bangkit.rahayoo.data.model.StressTestAnswer
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.UiState
+import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import kotlinx.coroutines.launch
 
 class StressTestViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _uiState: MutableLiveData<UiState<MessageResponseWithUserId>> =
-        MutableLiveData(UiState.Loading)
-    val uiState: LiveData<UiState<MessageResponseWithUserId>>
+    private val _uiState: MutableLiveData<UiState<MessageResponse>> =
+        MutableLiveData()
+    val uiState: LiveData<UiState<MessageResponse>>
         get() = _uiState
 
-    fun submitAnswer(list: List<StressTestAnswer>) {
+    fun submitAnswer(list: StressTestAnswer) {
         _uiState.value = UiState.Loading
         viewModelScope.launch {
             repository.submitStressTestAnswer(list, {
