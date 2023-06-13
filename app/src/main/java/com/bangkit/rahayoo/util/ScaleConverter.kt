@@ -36,3 +36,14 @@ fun Float.toEmoteValue(questionType: StressTestQuestionType): String {
         }
     }
 }
+
+fun String.toEmoteValue(): String {
+    return when (this) {
+        "sadness" -> "\uD83D\uDE14"
+        "anger" -> "\uD83D\uDE24"
+        "joy" -> "\uD83D\uDE04"
+        "fear" -> "\uD83D\uDE25"
+        "love" -> "\uD83E\uDD70"
+        else -> "Unknown Data"
+    }
+}

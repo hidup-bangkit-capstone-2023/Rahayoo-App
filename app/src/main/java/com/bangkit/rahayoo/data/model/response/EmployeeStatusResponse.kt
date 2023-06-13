@@ -8,15 +8,17 @@ data class StressLevelResponse(
 )
 
 data class MoodPerDay(
-    val mood: Int,
-    val date: String
+    @Json(name = "mood_value")
+    val mood: String,
+    val date: String,
+    val count: Int
 )
 
 data class WeeklyStatusResponse(
     @Json(name = "weekly_stress_avg")
-    val weeklyStressAvg: Int,
-    @Json(name = "weekly_mood_avg")
-    val weeklyMoodAvg: Int?,
-    @Json(name = "weekly_mood_per_day")
-    val weeklyMoodPerDay: List<MoodPerDay>?
+    val weeklyStressAvg: Float? = null,
+    @Json(name = "weekly_mood")
+    val weeklyMood: String? = null,
+    @Json(name = "weekly_calendar")
+    val weeklyMoodPerDay: List<MoodPerDay> = emptyList()
 )
