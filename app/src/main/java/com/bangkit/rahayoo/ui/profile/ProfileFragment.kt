@@ -55,6 +55,7 @@ class ProfileFragment : Fragment() {
                         .into(binding.ivProfile)
 
                     binding.tvProfileName.text = userData.name
+                    binding.tvProfileCompany.text = userData.jobTitle
                 }
 
                 is UiState.Error -> {

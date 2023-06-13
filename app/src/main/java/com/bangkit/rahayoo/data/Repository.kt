@@ -2,6 +2,7 @@ package com.bangkit.rahayoo.data
 
 import com.bangkit.rahayoo.data.firebase.FirebaseDataSource
 import com.bangkit.rahayoo.data.local.Preferences
+import com.bangkit.rahayoo.data.model.StressTestAnswer
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.User
 import com.bangkit.rahayoo.data.model.body.RegisterBody
@@ -56,10 +57,11 @@ class Repository(
         }
     }
 
-    suspend fun submitStressTestAnswer(answers: List<StressTestQuestion>, onSuccess: (message: MessageResponseWithUserId) -> Unit, onFailure: (Exception) -> Unit) {
+    suspend fun submitStressTestAnswer(answers: List<StressTestAnswer>, onSuccess: (message: MessageResponseWithUserId) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
-            val response = apiService.submitStressTestAnswer(getTokenTask.token!!, answers)
+            val userId = preferences.getUserId()
+            val response = apiService.submitStressTestAnswer(getTokenTask.token!!, answers, userId!!)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {
@@ -100,10 +102,11 @@ class Repository(
         }
     }
 
-    suspend fun getEmployeeStressLevel(onSuccess: (StressLevelResponse) -> Unit, onFailure: (Exception) -> Unit) {
+    suspend fun getUserWeeklyStressLevel(onSuccess: (StressLevelResponse) -> Unit, onFailure: (Exception) -> Unit) {
         val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
         return if (getTokenTask?.token != null) {
-            val response = apiService.getEmployeeStressLevel(getTokenTask.token!!)
+            val userId = preferences.getUserId()
+            val response = apiService.getWeeklyStressLevel(getTokenTask.token!!, userId!!)
             if (response.isSuccessful) {
                 onSuccess(response.body()!!)
             } else {

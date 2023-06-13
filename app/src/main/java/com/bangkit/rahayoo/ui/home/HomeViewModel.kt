@@ -22,7 +22,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     init {
         getUserData()
-        getUserStressLevelData()
+        getUserWeeklyStressLevel()
     }
 
     private fun getUserData() {
@@ -36,18 +36,15 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    private fun getUserStressLevelData() {
+    private fun getUserWeeklyStressLevel() {
         _userStressLevelData.value = UiState.Loading
-        /* Uncomment when repo is done
         viewModelScope.launch {
-            repository.getEmployeeStressLevel({
+            repository.getUserWeeklyStressLevel({
                 _userStressLevelData.value = UiState.Success(it)
             }, {
                 _userStressLevelData.value = UiState.Error(it.message.toString())
             })
         }
-
-         */
     }
 
     fun signOut() {

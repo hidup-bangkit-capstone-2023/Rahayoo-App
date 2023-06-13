@@ -7,6 +7,10 @@ data class StressTestQuestion(
     val answerScale: Int = 1,
 )
 
+data class StressTestAnswer(
+    val answerScale: Int = 1
+)
+
 enum class StressTestQuestionType {
     POSITIVE,
     NEGATIVE

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.rahayoo.R
+import com.bangkit.rahayoo.data.model.StressTestAnswer
 import com.bangkit.rahayoo.data.model.StressTestQuestion
 import com.bangkit.rahayoo.data.model.StressTestQuestions
 import com.bangkit.rahayoo.databinding.FragmentStressTestBinding
@@ -37,7 +38,7 @@ class StressTestFragment : Fragment(), View.OnClickListener {
 
     private val questions = StressTestQuestions.getAllQuestion()
     private var currentQuestion = questions[questionCounter]
-    private val answeredQuestion = mutableListOf<StressTestQuestion>()
+    private val answeredQuestion = mutableListOf<StressTestAnswer>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +75,8 @@ class StressTestFragment : Fragment(), View.OnClickListener {
         binding.tvQuestionHeader.visibility = View.VISIBLE
 
         binding.lpiQuestion.progress = 10
-        binding.tvStressLevelHeadline.text = getString(R.string.question_counter_headline, questionCounter + 1)
+        binding.tvStressLevelHeadline.text =
+            getString(R.string.question_counter_headline, questionCounter + 1)
         binding.tvQuestion.text = currentQuestion.question
     }
 
@@ -84,15 +86,18 @@ class StressTestFragment : Fragment(), View.OnClickListener {
             return
         }
 
-        answeredQuestion.add(currentQuestion.copy(
-            answerScale = binding.slider.value.toScaleValue()
-        ))
+        answeredQuestion.add(
+            StressTestAnswer(
+                answerScale = binding.slider.value.toScaleValue()
+            )
+        )
         currentQuestion = questions[++questionCounter]
 
         resetSlider()
 
         binding.lpiQuestion.incrementProgressBy(10)
-        binding.tvStressLevelHeadline.text = getString(R.string.question_counter_headline, questionCounter + 1)
+        binding.tvStressLevelHeadline.text =
+            getString(R.string.question_counter_headline, questionCounter + 1)
         binding.tvQuestion.text = currentQuestion.question
 
         if (questionCounter == questions.size - 1) {
@@ -111,9 +116,11 @@ class StressTestFragment : Fragment(), View.OnClickListener {
             R.id.btn_stress_test -> {
                 setupQuestion()
             }
+
             R.id.btn_question_navigate -> {
                 nextQuestion()
             }
+
             R.id.btn_close -> {
                 findNavController().navigateUp()
             }

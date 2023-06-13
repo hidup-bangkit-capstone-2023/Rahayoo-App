@@ -14,6 +14,8 @@ data class User(
     val age: Int? = 0,
     @Json(name = "department_id")
     val departmentId: String? = "",
+    @Json(name = "job_title")
+    val jobTitle: String? = "",
     @Json(name = "avatar_url")
     val avatarUrl: String? = null,
 )

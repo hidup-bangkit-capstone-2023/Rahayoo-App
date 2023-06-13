@@ -85,6 +85,7 @@ class EditProfileFragment : Fragment() {
                     binding.btnSubmitEditProfile.isClickable = true
                     binding.etName.setText(userData.name)
                     binding.etAddress.setText(userData.address)
+                    binding.etJobTitle.setText(userData.jobTitle)
 
                     if (userData.dateOfBirth != null) {
                         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())

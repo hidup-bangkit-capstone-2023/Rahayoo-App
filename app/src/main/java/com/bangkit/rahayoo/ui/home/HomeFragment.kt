@@ -1,6 +1,7 @@
 package com.bangkit.rahayoo.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,10 @@ import com.bangkit.rahayoo.ui.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class HomeFragment : Fragment(), View.OnClickListener {
+
+    companion object {
+        private const val TAG = "HomeFragment"
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -81,7 +86,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     changeWeeklyCalendarLoadingVisibility(false)
                     val userStressLevelData = uiState.data
 
-
+                    Log.d(TAG, "onViewCreated: $userStressLevelData")
                     binding.apply {
 //                        tvPercentageStressWeek.text = getString(R.string.stress_level_weekly_percentage, userStressLevelData.stressValue)
                     }
