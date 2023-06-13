@@ -3,6 +3,7 @@ package com.bangkit.rahayoo.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.rahayoo.data.Repository
+import com.bangkit.rahayoo.ui.chat.ChatViewModel
 import com.bangkit.rahayoo.ui.home.HomeViewModel
 import com.bangkit.rahayoo.ui.login.LoginViewModel
 import com.bangkit.rahayoo.ui.profile.ProfileViewModel
@@ -30,6 +31,9 @@ class ViewModelFactory(private val repository: Repository): ViewModelProvider.Ne
             }
             modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
                 EditProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ChatViewModel::class.java) -> {
+                ChatViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown view model class: ${modelClass.name}")
         }
