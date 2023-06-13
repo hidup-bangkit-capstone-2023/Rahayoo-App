@@ -9,6 +9,7 @@ import com.bangkit.rahayoo.data.model.response.CompanyResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
+import com.bangkit.rahayoo.data.model.response.WeeklyStatusResponse
 import com.squareup.moshi.Json
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,6 +31,12 @@ interface ApiService {
         @Body userBody: UserBody,
         @Path("id") userId: String
     ): Response<MessageResponse>
+
+    @GET("api/mood/weekly-calendar/{id}")
+    suspend fun getUserWeeklyCalendar(
+        @Header("Authorization") authorization: String,
+        @Path("id") userId: String
+    ): Response<WeeklyStatusResponse>
 
     @GET("api/stress-level/weekly/{id}")
     suspend fun getWeeklyStressLevel(

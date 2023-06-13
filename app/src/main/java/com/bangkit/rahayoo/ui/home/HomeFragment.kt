@@ -13,7 +13,13 @@ import com.bangkit.rahayoo.data.model.UiState
 import com.bangkit.rahayoo.databinding.FragmentHomeBinding
 import com.bangkit.rahayoo.di.Injection
 import com.bangkit.rahayoo.ui.ViewModelFactory
+import com.bangkit.rahayoo.util.toEmoteValue
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -88,7 +94,42 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     Log.d(TAG, "onViewCreated: $userStressLevelData")
                     binding.apply {
-//                        tvPercentageStressWeek.text = getString(R.string.stress_level_weekly_percentage, userStressLevelData.stressValue)
+                        tvPercentageStressWeek.text = getString(R.string.stress_level_weekly_percentage, userStressLevelData.weeklyStressAvg ?: 0f)
+                        tvEmoteStressWeek.text = userStressLevelData.weeklyMood?.toEmoteValue()
+                        for (i in 0 until userStressLevelData.weeklyMoodPerDay.size) {
+                            val data = userStressLevelData.weeklyMoodPerDay[i]
+                            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                            val date = inputFormat.parse(data.date)
+
+                            val outputFormatDayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault())
+                            val dayOfWeek = date?.let { outputFormatDayOfWeek.format(it) }
+                            val outputFormatDay = SimpleDateFormat("dd", Locale.getDefault())
+                            val day = date?.let { outputFormatDay.format(it) }
+
+
+                            when (i) {
+                                0 -> {
+                                    tvDayOneDate.text = String.format("%s\n%s", day, dayOfWeek?.take(3))
+                                    tvDayOneMood.text = data.mood.toEmoteValue()
+                                }
+                                1 -> {
+                                    tvDayTwoDate.text = String.format("%s\n%s", day, dayOfWeek?.take(3))
+                                    tvDayTwoMood.text = data.mood.toEmoteValue()
+                                }
+                                2 -> {
+                                    tvDayThreeDate.text = String.format("%s\n%s", day, dayOfWeek?.take(3))
+                                    tvDayThreeMood.text = data.mood.toEmoteValue()
+                                }
+                                3 -> {
+                                    tvDayFourDate.text = String.format("%s\n%s", day, dayOfWeek?.take(3))
+                                    tvDayFourMood.text = data.mood.toEmoteValue()
+                                }
+                                4 -> {
+                                    tvDayFiveDate.text = String.format("%s\n%s", day, dayOfWeek?.take(3))
+                                    tvDayFiveMood.text = data.mood.toEmoteValue()
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -105,11 +146,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
             binding.apply {
                 cpiWeeklyCalendar.visibility = View.VISIBLE
                 tvWeeklyCalendarCpiLabel.visibility = View.VISIBLE
+                cvWeekSummary.visibility = View.GONE
+                containerDayOne.visibility = View.GONE
+                containerDayTwo.visibility = View.GONE
+                containerDayThree.visibility = View.GONE
+                containerDayFour.visibility = View.GONE
+                containerDayFive.visibility = View.GONE
             }
         } else {
             binding.apply {
                 cpiWeeklyCalendar.visibility = View.GONE
                 tvWeeklyCalendarCpiLabel.visibility = View.GONE
+                cvWeekSummary.visibility = View.VISIBLE
+                containerDayOne.visibility = View.VISIBLE
+                containerDayTwo.visibility = View.VISIBLE
+                containerDayThree.visibility = View.VISIBLE
+                containerDayFour.visibility = View.VISIBLE
+                containerDayFive.visibility = View.VISIBLE
             }
         }
     }

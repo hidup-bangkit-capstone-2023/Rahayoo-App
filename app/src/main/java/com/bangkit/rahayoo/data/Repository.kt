@@ -10,6 +10,7 @@ import com.bangkit.rahayoo.data.model.body.UserBody
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
+import com.bangkit.rahayoo.data.model.response.WeeklyStatusResponse
 import com.bangkit.rahayoo.data.remote.ApiService
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.tasks.await
@@ -96,6 +97,21 @@ class Repository(
                 onSuccess(response.body()!!)
             } else {
                 onFailure(Exception(response.message()))
+            }
+        } else {
+            onFailure(Exception("Failed to retrieve firebase id token"))
+        }
+    }
+
+    suspend fun getUserWeeklyCalendar(onSuccess: (WeeklyStatusResponse) -> Unit, onFailure: (Exception) -> Unit) {
+        val getTokenTask = firebaseDataSource.getCurrentUser()?.getIdToken(true)?.await()
+        return if (getTokenTask?.token != null) {
+            val userId = preferences.getUserId()
+            val response = apiService.getUserWeeklyCalendar(getTokenTask.token!!, userId!!)
+            if (response.isSuccessful) {
+                onSuccess(response.body()!!)
+            } else {
+                onFailure(Exception((response.message())))
             }
         } else {
             onFailure(Exception("Failed to retrieve firebase id token"))

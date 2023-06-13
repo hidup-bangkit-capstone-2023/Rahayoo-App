@@ -249,6 +249,7 @@
                             app:cardCornerRadius="8dp">
 
                             <TextView
+                                android:id="@+id/tv_day_one_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="3\nMon"
@@ -259,6 +260,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
+                            android:id="@+id/tv_day_one_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="🙂"
@@ -276,6 +278,7 @@
                         app:layout_constraintEnd_toStartOf="@id/container_day_three"
                         android:orientation="vertical"
                         android:layout_marginTop="12dp"
+                        android:layout_marginStart="6dp"
                         android:visibility="invisible"
                         tools:visibility="visible">
 
@@ -288,6 +291,7 @@
                             app:cardCornerRadius="8dp">
 
                             <TextView
+                                android:id="@+id/tv_day_two_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="3\nMon"
@@ -298,6 +302,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
+                            android:id="@+id/tv_day_two_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="🙂"
@@ -315,6 +320,7 @@
                         app:layout_constraintEnd_toStartOf="@id/container_day_four"
                         android:orientation="vertical"
                         android:layout_marginTop="12dp"
+                        android:layout_marginStart="6dp"
                         android:visibility="invisible"
                         tools:visibility="visible">
 
@@ -327,6 +333,7 @@
                             app:cardCornerRadius="8dp">
 
                             <TextView
+                                android:id="@+id/tv_day_three_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="3\nMon"
@@ -337,6 +344,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
+                            android:id="@+id/tv_day_three_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="🙂"
@@ -354,6 +362,7 @@
                         app:layout_constraintEnd_toStartOf="@id/container_day_five"
                         android:orientation="vertical"
                         android:layout_marginTop="12dp"
+                        android:layout_marginStart="6dp"
                         android:visibility="invisible"
                         tools:visibility="visible">
 
@@ -366,6 +375,7 @@
                             app:cardCornerRadius="8dp">
 
                             <TextView
+                                android:id="@+id/tv_day_four_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="3\nMon"
@@ -376,6 +386,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
+                            android:id="@+id/tv_day_four_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="🙂"
@@ -394,6 +405,7 @@
                         android:orientation="vertical"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
+                        android:layout_marginStart="6dp"
                         android:visibility="invisible"
                         tools:visibility="visible">
 
@@ -406,6 +418,7 @@
                             app:cardCornerRadius="8dp">
 
                             <TextView
+                                android:id="@+id/tv_day_five_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="3\nMon"
@@ -416,6 +429,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <TextView
+                            android:id="@+id/tv_day_five_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="🙂"
