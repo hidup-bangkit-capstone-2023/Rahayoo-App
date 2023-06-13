@@ -35,4 +35,6 @@ class FirebaseDataSource {
     }
 
     fun getCurrentUser() = firebaseAuth.currentUser
+
+    fun signOutUser() = firebaseAuth.signOut()
 }
