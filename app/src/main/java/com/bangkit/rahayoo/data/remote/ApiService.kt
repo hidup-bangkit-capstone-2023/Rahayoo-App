@@ -1,10 +1,15 @@
 package com.bangkit.rahayoo.data.remote
 
+import com.bangkit.rahayoo.data.model.Chat
 import com.bangkit.rahayoo.data.model.StressTestAnswer
 import com.bangkit.rahayoo.data.model.User
+import com.bangkit.rahayoo.data.model.body.ChatBody
+import com.bangkit.rahayoo.data.model.body.GetUserIdBody
 import com.bangkit.rahayoo.data.model.body.RegisterBody
 import com.bangkit.rahayoo.data.model.body.UserBody
+import com.bangkit.rahayoo.data.model.response.ChatResponse
 import com.bangkit.rahayoo.data.model.response.CompanyResponse
+import com.bangkit.rahayoo.data.model.response.EmployeeId
 import com.bangkit.rahayoo.data.model.response.MessageResponse
 import com.bangkit.rahayoo.data.model.response.MessageResponseWithUserId
 import com.bangkit.rahayoo.data.model.response.StressLevelResponse
@@ -23,6 +28,12 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Body body: RegisterBody
     ): Response<MessageResponseWithUserId>
+
+    @POST("api/auth/userId")
+    suspend fun getUserId(
+        @Header("Authorization") authorization: String,
+        @Body getUserIdBody: GetUserIdBody
+    ): Response<String>
 
     @POST("api/auth/user-update/{id}")
     suspend fun updateUserData(
@@ -62,4 +73,11 @@ interface ApiService {
     suspend fun getUserData(
         @Header("Authorization") authorization: String, @Path("id") userId: String
     ): Response<User>
+
+    @POST("api/chatbot/{id}")
+    suspend fun sendChatMessage(
+        @Header("Authorization") authorization: String,
+        @Path("id") userId: String,
+        @Body chat: ChatBody
+    ): Response<ChatResponse>
 }

@@ -178,6 +178,8 @@
                     android:id="@+id/et_department"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:hint="@string/department"/>
 
             </com.google.android.material.textfield.TextInputLayout>

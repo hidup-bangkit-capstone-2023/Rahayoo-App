@@ -1,10 +1,12 @@
 package com.bangkit.rahayoo.ui.chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.rahayoo.R
 import com.bangkit.rahayoo.data.model.Chat
 import com.bangkit.rahayoo.databinding.LayoutItemChatBinding
 
@@ -13,6 +15,10 @@ class ChatAdapter: ListAdapter<Chat, ChatAdapter.ChatViewHolder>(ChatDiffUtilCal
     inner class ChatViewHolder(private val binding: LayoutItemChatBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(chat: Chat) {
             binding.tvChatMessage.text = chat.message
+
+            if (chat.sender.equals("rahayoo.ai")) {
+                binding.ivChatProfile.setImageResource(R.drawable.avatar_placeholder)
+            } else binding.ivChatProfile.setImageResource(R.drawable.ic_logo_non_transparent)
         }
     }
 
@@ -23,6 +29,7 @@ class ChatAdapter: ListAdapter<Chat, ChatAdapter.ChatViewHolder>(ChatDiffUtilCal
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
+        Log.d("ChatAdapter", "onBindViewHolder: $itemCount")
         holder.bind(getItem(position))
     }
 }

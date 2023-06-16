@@ -13,7 +13,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/til_chat"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_item_chat"/>
+        tools:listitem="@layout/layout_item_chat"
+        tools:itemCount="1"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_chat_sample_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:text="@string/chat_sample_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_chat_sample_2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/lpi_chat"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_chat_sample_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:text="@string/chat_sample_2"
+        app:layout_constraintStart_toEndOf="@id/btn_chat_sample_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lpi_chat"/>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/lpi_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/til_chat"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        android:layout_marginBottom="4dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_send"

@@ -1,7 +1,6 @@
 package com.bangkit.rahayoo.data.model.body
 
-data class RegisterBody(
-    val name: String,
+data class GetUserIdBody(
     val email: String,
-    val uid: String,
+    val uid: String
 )

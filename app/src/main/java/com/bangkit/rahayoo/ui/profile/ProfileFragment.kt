@@ -63,5 +63,10 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
+        binding.cvSignOut.setOnClickListener {
+            viewModel.signOut()
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+        }
     }
 }

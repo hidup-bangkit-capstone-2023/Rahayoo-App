@@ -29,4 +29,8 @@ class ProfileViewModel(private val repository: Repository): ViewModel() {
             })
         }
     }
+
+    fun signOut() {
+        repository.signOutUser()
+    }
 }

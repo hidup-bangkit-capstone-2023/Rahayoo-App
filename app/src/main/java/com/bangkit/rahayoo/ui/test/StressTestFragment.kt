@@ -80,8 +80,11 @@ class StressTestFragment : Fragment(), View.OnClickListener {
                         "Answer Submitted",
                         Snackbar.LENGTH_SHORT
                     ).show()
-                    findNavController().navigateUp()
+                    viewModel.getUserData {
+                        showResult()
+                    }
                 }
+
 
                 is UiState.Error -> {
                     // Show Error
@@ -107,6 +110,42 @@ class StressTestFragment : Fragment(), View.OnClickListener {
         binding.tvStressLevelHeadline.text =
             getString(R.string.question_counter_headline, questionCounter + 1)
         binding.tvQuestion.text = currentQuestion.question
+    }
+
+    private fun showResult() {
+        binding.cvQuestionContainer.visibility = View.GONE
+        binding.tvQuestionHeader.visibility = View.GONE
+        binding.tvStressLevelHeadline.text = getString(R.string.stress_level_test)
+        binding.ivStressResult.visibility = View.VISIBLE
+        binding.tvStressResult.visibility = View.VISIBLE
+        binding.cvStressResultInfoContainer.visibility = View.VISIBLE
+        binding.btnStressTest.text = getString(R.string.done)
+        binding.btnQuestionNavigate.visibility = View.GONE
+        binding.btnStressTest.visibility = View.VISIBLE
+
+        val userData = viewModel.userData.value
+
+        when (val stressLevel = userData?.weeklyStressAvg ?: 0F) {
+            in 0F..15F -> {
+                binding.ivStressResult.setImageResource(R.drawable.item_stress_result_low)
+                binding.tvStressResult.text = getString(R.string.stress_level_result, stressLevel, "Low")
+                binding.tvStressResultInfo.setText(R.string.stress_level_result_low)
+                binding.tvStressResultInfoTips.setText(R.string.stress_level_low_info_tips)
+            }
+            in 15F..30F -> {
+                binding.ivStressResult.setImageResource(R.drawable.item_stress_result_moderate)
+                binding.tvStressResult.text = getString(R.string.stress_level_result, stressLevel, "Moderate")
+                binding.tvStressResultInfo.setText(R.string.stress_level_result_moderate)
+                binding.tvStressResultInfoTips.setText(R.string.stress_level_moderate_info_tips)
+            }
+            else -> {
+                binding.ivStressResult.setImageResource(R.drawable.item_stress_result_high)
+                binding.tvStressResult.text = getString(R.string.stress_level_result, stressLevel, "High")
+                binding.tvStressResultInfo.setText(R.string.stress_level_result_high)
+                binding.tvStressResultInfoTips.setText(R.string.stress_level_high_info_tips)
+            }
+        }
+
     }
 
     private fun nextQuestion() {
@@ -139,7 +178,9 @@ class StressTestFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_stress_test -> {
-                setupQuestion()
+                if (questionCounter == questions.size - 1) {
+                    findNavController().navigateUp()
+                } else setupQuestion()
             }
 
             R.id.btn_question_navigate -> {

@@ -73,6 +73,10 @@ class EditProfileFragment : Fragment() {
             }
         }
 
+        binding.etDepartment.setOnClickListener {
+            binding.etDepartment.setText(getString(R.string.dummy_dept_name))
+        }
+
         viewModel.userData.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Loading -> {

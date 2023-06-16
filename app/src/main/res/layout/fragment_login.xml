@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_password_label"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        app:layout_constraintBottom_toTopOf="@id/btn_login"
+        app:layout_constraintBottom_toTopOf="@id/view_login_option_divider"
         app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -128,6 +128,31 @@
         app:layout_constraintTop_toBottomOf="@id/til_password"
         app:layout_constraintEnd_toEndOf="@id/til_password"
         android:layout_marginTop="4dp"/>
+
+    <ImageView
+        android:id="@+id/view_login_option_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/item_divider_options"
+        app:layout_constraintTop_toBottomOf="@id/til_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_login_with_google"
+        android:layout_marginTop="42dp"
+        android:importantForAccessibility="no"/>
+    
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_with_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/view_login_option_divider"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintBottom_toTopOf="@id/btn_login"
+        android:layout_marginTop="12dp"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:text="@string/login_with_google"
+        app:icon="@drawable/ic_google"/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_indicator"

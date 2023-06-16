@@ -12,7 +12,7 @@ class FirebaseDataSource {
         email: String,
         password: String,
         onSuccess: (AuthResult) -> Unit,
-        onFailure: (Exception) -> Unit
+        onFailure: (Exception) -> Unit,
     ) {
         firebaseAuth.signInWithEmailAndPassword(
             email, password

@@ -49,6 +49,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.btnTakeStressTest.setOnClickListener(this)
         binding.btnNotification.setOnClickListener(this)
         binding.cvUpdateDataNow.setOnClickListener(this)
+        binding.btnSeeMorePerformanceOverview.setOnClickListener(this)
 
         viewModel.user.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -72,6 +73,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
                             .into(ivProfile)
 
                         tvProfileName.text = userData.name
+                    }
+
+                    if (userData.departmentId != null) {
+                        binding.cpiPerformanceOverview.progress = 50
+                        binding.tvProgressPerformanceOverviewSummary.text = "50%"
+                        binding.tvPerformanceDone.text = "Done (50%)"
+                        binding.tvPerformanceTodo.text = "Todo (50%)"
                     }
                 }
 
@@ -141,6 +149,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserData()
+        viewModel.getUserWeeklyCalendar()
+    }
+
     private fun changeWeeklyCalendarLoadingVisibility(isVisible: Boolean) {
         if (isVisible) {
             binding.apply {
@@ -172,18 +186,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
             R.id.btn_take_stress_test -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStressTestFragment())
             }
-            R.id.btn_notification -> {
-                viewModel.signOut()
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-            }
             R.id.cv_update_data_now -> {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToEditProfileFragment())
             }
+            R.id.btn_see_more_performance_overview -> {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPerformanceDetailFragment())
+            }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

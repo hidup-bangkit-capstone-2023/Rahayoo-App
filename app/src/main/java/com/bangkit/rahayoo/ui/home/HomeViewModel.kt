@@ -26,7 +26,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         getUserWeeklyCalendar()
     }
 
-    private fun getUserData() {
+    fun getUserData() {
         _user.value = UiState.Loading
         viewModelScope.launch {
             repository.getUserData({
@@ -37,7 +37,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    private fun getUserWeeklyCalendar() {
+    fun getUserWeeklyCalendar() {
         _userStressLevelData.value = UiState.Loading
         viewModelScope.launch {
             repository.getUserWeeklyCalendar({
@@ -46,9 +46,5 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
                 _userStressLevelData.value = UiState.Error(it.message.toString())
             })
         }
-    }
-
-    fun signOut() {
-        repository.signOutUser()
     }
 }

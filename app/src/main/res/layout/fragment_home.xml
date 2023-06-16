@@ -530,6 +530,7 @@
                             android:importantForAccessibility="no"/>
 
                         <TextView
+                            android:id="@+id/tv_performance_done"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
@@ -557,6 +558,7 @@
                             android:importantForAccessibility="no"/>
 
                         <TextView
+                            android:id="@+id/tv_performance_todo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"

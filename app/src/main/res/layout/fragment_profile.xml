@@ -367,6 +367,56 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_sign_out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintTop_toBottomOf="@id/cv_guidelines"
+                android:layout_marginTop="12dp"
+                app:strokeColor="?attr/colorPrimaryInverse"
+                app:strokeWidth="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="20dp">
+
+                    <ImageView
+                        android:id="@+id/iv_sign_out"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:src="@drawable/ic_signout"
+                        android:importantForAccessibility="no"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@id/iv_sign_out"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_sign_out"
+                        app:layout_constraintStart_toEndOf="@id/iv_sign_out"
+                        app:layout_constraintEnd_toStartOf="@id/iv_sign_out_arrow"
+                        android:text="@string/sign_out"
+                        android:layout_marginHorizontal="12dp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_sign_out_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_arrow_forward"
+                        android:importantForAccessibility="no"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

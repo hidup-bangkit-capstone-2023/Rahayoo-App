@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimaryFixedDim"
     tools:context=".ui.test.StressTestFragment">
 
     <ImageView
@@ -90,6 +89,69 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/tv_stress_level_intro_title" />
+
+    <ImageView
+        android:id="@+id/iv_stress_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/item_stress_result_moderate"
+        app:layout_constraintBottom_toTopOf="@id/cv_stress_result_info_container"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/lpi_question"
+        android:visibility="gone"
+        android:importantForAccessibility="no"/>
+
+    <TextView
+        android:id="@+id/tv_stress_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/iv_stress_result"
+        app:layout_constraintBottom_toBottomOf="@id/iv_stress_result"
+        app:layout_constraintStart_toStartOf="@id/iv_stress_result"
+        app:layout_constraintEnd_toEndOf="@id/iv_stress_result"
+        android:textColor="?attr/colorOnPrimary"
+        android:text="20\nModerate"
+        android:textAlignment="center"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_stress_result_info_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintBottom_toTopOf="@id/btn_stress_test"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
+        android:backgroundTint="?attr/colorPrimaryContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_stress_result_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stress_level_result_low"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+
+            <TextView
+                android:id="@+id/tv_stress_result_info_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/stress_level_low_info_tips"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tv_question_header"

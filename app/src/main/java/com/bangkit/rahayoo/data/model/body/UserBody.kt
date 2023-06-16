@@ -12,4 +12,5 @@ data class UserBody(
     val jobTitle: String,
     val department: String,
     val email: String,
+    var uid: String = "",
 )

@@ -34,6 +34,7 @@
     <string name="take_a_test">Take a Test</string>
     <string name="fetching_user_data">Fetching User Data</string>
     <string name="stress_level_weekly_percentage">%1$.1f%%\n Stress Level</string>
+    <string name="stress_level_result">%1$.0f\n%2$s</string>
     <string name="fragment_login_route">LoginFragmentRoute</string>
     <string name="fragment_home_route">HomeFragmentRoute</string>
     <string name="home">Home</string>
@@ -55,4 +56,17 @@
     <string name="department">Department</string>
     <string name="updating_profie">Updating Profie</string>
     <string name="choose_date_of_birth">Choose date of Birth</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="register_with_google">Register with Google</string>
+    <string name="done">Done</string>
+    <string name="chat_sample_1">Hi! how are you?</string>
+    <string name="chat_sample_2">I\'m having a bad day today</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="dummy_dept_name">test-dept</string>
+    <string name="stress_level_result_low">Low</string>
+    <string name="stress_level_result_moderate">Moderate</string>
+    <string name="stress_level_result_high">High</string>
+    <string name="stress_level_low_info_tips">It’s seems you are stressed in low level, keep it stable by channeling your stress through positive channel like watching your favorite show.</string>
+    <string name="stress_level_moderate_info_tips">It’s seems you are stressed in moderate level, lower you stress by channeling your stress through positive channel like watching your favorite show.</string>
+    <string name="stress_level_high_info_tips">Careful because your stress level is high, lower you stress by channeling your stress through positive channel like watching your favorite show.</string>
 </resources>
