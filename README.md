@@ -44,6 +44,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you have any questions or would like to contact the contributors, please email:
 
-- Ibrahim
+- [Ibrahim Sambata](mailto:ibrahimsambata02@gmail.com)
 
 Feel free to reach out for any inquiries or further information about the Rahayoo-App project.
