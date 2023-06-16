@@ -1,6 +1,6 @@
 # Rahayoo-App
 
-This is the Rahayoo-App repository for the Rahayoo Bangkit Capstone 2023 project. The repository contains the code for the Rahayoo mobile application, developed using Kotlin.
+This is the Rahayoo-App repository for the Rahayoo Bangkit Capstone 2023 project. The repository contains the code for the Rahayoo mobile application.
 
 ## About
 
@@ -15,6 +15,16 @@ To install and run the Rahayoo-App, follow these steps:
 3. Build and run the application on an Android device or emulator.
 
 Note: Make sure you have the necessary dependencies and Android SDK installed to run the application successfully.
+
+## Tech Stack
+
+1. Kotlin
+2. Firebase
+3. Retrofit HTTP Client + Moshi Converter
+4. Material3
+5. Jetpack Library (ViewModel, LiveData, Navigation Component)
+6. [Glide](https://github.com/bumptech/glide)
+7. [TickerView](https://github.com/robinhood/ticker)
 
 ## Contributing
 
